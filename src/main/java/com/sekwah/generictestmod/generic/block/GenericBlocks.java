@@ -1,4 +1,4 @@
-package com.sekwah.generictestmod.generic.blocks;
+package com.sekwah.generictestmod.generic.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -7,13 +7,10 @@ import net.minecraft.block.trees.OakTree;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import static com.sekwah.generictestmod.GenericConstants.MOD_ID;
 

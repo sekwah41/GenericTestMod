@@ -1,4 +1,4 @@
-package com.sekwah.generictestmod.generic.blocks;
+package com.sekwah.generictestmod.generic.block;
 
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.trees.Tree;

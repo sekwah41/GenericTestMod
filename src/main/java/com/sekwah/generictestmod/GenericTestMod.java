@@ -1,9 +1,8 @@
 package com.sekwah.generictestmod;
 
-import com.sekwah.generictestmod.generic.blocks.GenericBlocks;
+import com.sekwah.generictestmod.generic.block.GenericBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
