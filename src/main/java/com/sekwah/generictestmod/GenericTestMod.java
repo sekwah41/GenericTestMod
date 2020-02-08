@@ -1,8 +1,7 @@
-package com.example.examplemod;
+package com.sekwah.generictestmod;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -18,25 +17,26 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod("examplemod")
-public class ExampleMod
-{
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+@Mod("generictestmod")
+public class GenericTestMod {
 
-    public ExampleMod() {
-        // Register the setup method for modloading
+    public static final Logger LOGGER = LogManager.getLogger("Generic Mod Test");
+
+    public GenericTestMod() {
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+
         // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onServerStarting);
+
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -54,7 +54,7 @@ public class ExampleMod
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo("generictestmod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
@@ -64,8 +64,9 @@ public class ExampleMod
                 map(m->m.getMessageSupplier().get()).
                 collect(Collectors.toList()));
     }
+
     // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
+    // @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
@@ -81,4 +82,5 @@ public class ExampleMod
             LOGGER.info("HELLO from Register Block");
         }
     }
+
 }

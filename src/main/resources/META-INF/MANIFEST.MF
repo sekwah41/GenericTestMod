@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: GenericTestMod
+Implementation-Version: 0.0.1
+Specification-Vendor: Horizon
+Specification-Title: generictestmod
+Implementation-Timestamp: 2020-02-08T19:08:34+0000
+MixinConnector: com.sekwah.generictestmod.generic.MixinConnector
+Specification-Version: 1
+Implementation-Vendor: examplemodsareus
+

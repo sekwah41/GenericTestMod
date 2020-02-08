@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.sekwah.generictestmod.mixin",
+  "refmap": "mixins.generictestmod.json",
+  "mixins": [
+  ],
+  "client": [
+    "MixinMainMenu"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
