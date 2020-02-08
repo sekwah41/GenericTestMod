@@ -6,12 +6,12 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class GenGen {
 
     public static void init() {
-        BiomeManager.getBiomes(BiomeManager.BiomeType.WARM).forEach(biomeEntry -> biomeEntry.biome.addFeature(
+        BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).forEach(biome -> biome.addFeature(
                 GenerationStage.Decoration.UNDERGROUND_ORES,
                 Feature.ORE.configure(
                         new OreFeatureConfig(
