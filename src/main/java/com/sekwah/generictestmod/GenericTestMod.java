@@ -1,8 +1,11 @@
 package com.sekwah.generictestmod;
 
+import com.sekwah.generictestmod.generic.blocks.GenericBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -24,18 +27,24 @@ public class GenericTestMod {
 
     public GenericTestMod() {
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        eventBus.addListener(this::setup);
 
         // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+        eventBus.addListener(this::enqueueIMC);
 
         // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        eventBus.addListener(this::processIMC);
 
         // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        eventBus.addListener(this::doClientStuff);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onServerStarting);
+        /*eventBus.addGenericListener(Block.class, GenericBlocks::registerBlocks);
+        eventBus.addGenericListener(Item.class, GenericBlocks::registerBlockItems);*/
+        GenericBlocks.register(eventBus);
+
+        eventBus.addListener(this::onServerStarting);
 
     }
 
