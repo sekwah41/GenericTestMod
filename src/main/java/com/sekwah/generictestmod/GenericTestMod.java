@@ -1,6 +1,7 @@
 package com.sekwah.generictestmod;
 
 import com.sekwah.generictestmod.generic.block.GenericBlocks;
+import com.sekwah.generictestmod.generic.world.gen.GenGen;
 import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -55,6 +56,9 @@ public class GenericTestMod {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
+        // init gen features
+        GenGen.init();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
