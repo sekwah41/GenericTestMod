@@ -1,6 +1,7 @@
 package com.sekwah.generictestmod;
 
 import com.sekwah.generictestmod.generic.block.GenericBlocks;
+import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.event.RegistryEvent;
@@ -42,6 +43,8 @@ public class GenericTestMod {
         /*eventBus.addGenericListener(Block.class, GenericBlocks::registerBlocks);
         eventBus.addGenericListener(Item.class, GenericBlocks::registerBlockItems);*/
         GenericBlocks.register(eventBus);
+
+        GenericFeatures.register(eventBus);
 
         eventBus.addListener(this::onServerStarting);
 

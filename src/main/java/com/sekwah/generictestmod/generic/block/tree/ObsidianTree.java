@@ -1,5 +1,7 @@
 package com.sekwah.generictestmod.generic.block.tree;
 
+import com.sekwah.generictestmod.generic.world.biome.CustomFeatures;
+import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -12,8 +14,7 @@ import java.util.Random;
 public class ObsidianTree extends Tree {
 
     @Nullable
-    @Override
-    protected ConfiguredFeature<TreeFeatureConfig, ?> func_225546_b_(Random random, boolean b) {
-        return random.nextInt(10) == 0 ? Feature.FANCY_TREE.withConfiguration(b ? DefaultBiomeFeatures.field_226817_l_ : DefaultBiomeFeatures.field_226815_j_) : Feature.NORMAL_TREE.withConfiguration(b ? DefaultBiomeFeatures.field_226816_k_ : DefaultBiomeFeatures.field_226739_a_);
+    protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random p_225546_1_, boolean p_225546_2_) {
+        return GenericFeatures.SOLID_FANCY_TREE_FEATURE.get().configure(/*DefaultBiomeFeatures.BIRCH_TREE_CONFIG*/CustomFeatures.OBSIDIAN_TREE_CONFIG);
     }
 }

@@ -1,5 +1,6 @@
 package com.sekwah.generictestmod.generic.block;
 
+import com.sekwah.generictestmod.generic.block.tree.ObsidianTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,7 +21,7 @@ public class GenericBlocks {
     private static final DeferredRegister<Item> BLOCK_ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, MOD_ID);
 
     public static final RegistryObject<Block> OBSIDIAN_TREE = BLOCKS.register("obsidian_sapling",
-            () -> new GenericSaplingBlock(new OakTree(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
+            () -> new GenericSaplingBlock(new ObsidianTree(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
 
     public static final RegistryObject<Item> ITEM_OBSIDIAN_TREE = BLOCK_ITEMS.register("obsidian_sapling",
             () -> new BlockItem(OBSIDIAN_TREE.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
