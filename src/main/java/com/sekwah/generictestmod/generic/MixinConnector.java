@@ -1,4 +1,4 @@
-package com.sekwah.generictestmod.core;
+package com.sekwah.generictestmod.generic;
 
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
