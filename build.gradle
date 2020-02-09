@@ -104,13 +104,21 @@ repositories {
     }
 }
 
+configurations {
+    include {
+        compile.extendsFrom(include)
+    }
+}
+
 dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.1.1'
 
-    implementation "org.spongepowered:mixin:0.8-SNAPSHOT"
+    //implementation "org.spongepowered:mixin:0.8-SNAPSHOT"
+
+    include("org.spongepowered:mixin:0.8")
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -138,6 +146,18 @@ mixin {
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
+
+    from ((configurations.include).findAll({
+        it.isDirectory() || it.name.endsWith(".jar")
+    }).collect({
+        it.isDirectory() ? it : zipTree(it)
+    })) {
+        exclude("META-INF/services/cpw.mods.modlauncher.api.ITransformationService")
+        exclude("META-INF/services/cpw.mods.modlauncher.serviceapi.ILaunchPluginService")
+        exclude("META-INF/MUMFREY.RSA")
+        exclude("META-INF/MUMFREY.SF")
+    }
+
     manifest {
         attributes([
             "Specification-Title": project.modid,

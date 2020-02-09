@@ -3,6 +3,7 @@ package com.sekwah.generictestmod;
 import com.sekwah.generictestmod.generic.block.GenericBlocks;
 import com.sekwah.generictestmod.generic.world.gen.GenGen;
 import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
+import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biomes;
@@ -28,6 +29,23 @@ public class GenericTestMod {
     public static final Logger LOGGER = LogManager.getLogger("Generic Mod Test");
 
     public GenericTestMod() {
+
+        System.out.println("HERE");
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
+        System.out.println(ILaunchPluginService.Phase.AFTER);
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
