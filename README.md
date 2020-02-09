@@ -9,8 +9,10 @@ Examples:
 Ore Generation  
 Feature Generation  
 Custom Features  
-Mixins  
+Mixins (Works in dev but not client)
 
+The issue with mixins seems to be that cpw.mods.modlauncher.serviceapi.ILaunchPluginService doesn't seem to register
+anything after loading.
 
 /build/tmp/jar/
 
