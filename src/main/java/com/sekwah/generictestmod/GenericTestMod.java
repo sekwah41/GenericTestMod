@@ -5,6 +5,7 @@ import com.sekwah.generictestmod.generic.world.gen.GenGen;
 import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -58,7 +59,7 @@ public class GenericTestMod {
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 
         // init gen features
-        GenGen.init();
+        GenGen.addFeatures();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
