@@ -7,6 +7,8 @@ import cpw.mods.modlauncher.api.ITransformationService;
 import cpw.mods.modlauncher.api.ITransformer;
 import cpw.mods.modlauncher.api.IncompatibleEnvironmentException;
 import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
@@ -17,7 +19,13 @@ import java.util.Set;
 
 public class MixinTransformationService implements ITransformationService {
 
+    public Logger LOGGER = LogManager.getLogger("Generic Mod TransService");
+
     private boolean mixinsAlreadyLoaded = false;
+
+    public MixinTransformationService() {
+        LOGGER.info("transformation service triggered");
+    }
 
     @Nonnull
     @Override
@@ -29,6 +37,7 @@ public class MixinTransformationService implements ITransformationService {
     @Override
     public void initialize(IEnvironment environment) {
 
+        LOGGER.info("initialize");
         if(mixinsAlreadyLoaded) return;
 
         Optional<ILaunchPluginService> mixinLaunchPlugin = environment.findLaunchPlugin("mixin");
@@ -45,6 +54,9 @@ public class MixinTransformationService implements ITransformationService {
 
     @Override
     public void onLoad(IEnvironment env, Set<String> otherServices) throws IncompatibleEnvironmentException {
+
+        LOGGER.info("onLoad");
+
         /**
          * In case mixins are properly fixed
          */
