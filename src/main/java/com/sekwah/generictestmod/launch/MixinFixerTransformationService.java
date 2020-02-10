@@ -1,5 +1,6 @@
 package com.sekwah.generictestmod.launch;
 
+import com.google.common.collect.ImmutableList;
 import cpw.mods.modlauncher.LaunchPluginHandler;
 import cpw.mods.modlauncher.Launcher;
 import cpw.mods.modlauncher.ServiceLoaderStreamUtils;
@@ -8,25 +9,28 @@ import cpw.mods.modlauncher.api.ITransformationService;
 import cpw.mods.modlauncher.api.ITransformer;
 import cpw.mods.modlauncher.api.IncompatibleEnvironmentException;
 import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
+import joptsimple.OptionSpecBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 import org.spongepowered.asm.launch.MixinLaunchPlugin;
+import org.spongepowered.asm.launch.MixinTransformationService;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.function.BiFunction;
 
 public class MixinFixerTransformationService implements ITransformationService {
 
     public Logger LOGGER = LogManager.getLogger("Generic Mod TransService");
 
-    private boolean mixinsAlreadyLoaded = false;
+    private boolean shouldProcessMixins = true;
 
     private LaunchPluginHandler launchPlugins;
 
-    private Marker MODLAUNCHER = MarkerManager.getMarker("MODLAUNCHER");
+    private MixinTransformationService mixinTransformationService;
 
     @Nonnull
     @Override
@@ -37,19 +41,12 @@ public class MixinFixerTransformationService implements ITransformationService {
 
     @Override
     public void initialize(IEnvironment environment) {
-
-        LOGGER.info("initialize");
-        if(mixinsAlreadyLoaded) return;
-
-        Optional<ILaunchPluginService> mixinLaunchPlugin = environment.findLaunchPlugin("mixin");
-        if(mixinLaunchPlugin.isPresent()) {
-            return;
-        }
+        if(mixinTransformationService != null) mixinTransformationService.initialize(environment);
     }
 
     @Override
     public void beginScanning(IEnvironment environment) {
-        System.out.println(environment);
+        if(mixinTransformationService != null) mixinTransformationService.beginScanning(environment);
     }
 
 
@@ -57,10 +54,12 @@ public class MixinFixerTransformationService implements ITransformationService {
     public void onLoad(IEnvironment env, Set<String> otherServices) throws IncompatibleEnvironmentException {
 
         // Don't grab this before in case someone else does something stupid such as replacing the list.
+        // If mixins are detected skip any other processing so that whatever other plugin that has registered it
+        // can take over.
         try {
             launchPlugins = (LaunchPluginHandler) launchPluginsField.get(Launcher.INSTANCE);
             if(launchPlugins.get("mixin").isPresent()) {
-                mixinsAlreadyLoaded = true;
+                shouldProcessMixins = false;
                 return;
             }
         } catch (IllegalAccessException e) {
@@ -68,11 +67,14 @@ public class MixinFixerTransformationService implements ITransformationService {
             return;
         }
 
-        // TODO add checks to make sure another mod hasn't added mixins poorly.
-
         try {
             Map<String, ILaunchPluginService> pluginList = getPluginList();
             pluginList.put("mixin", new MixinLaunchPlugin());
+
+            if(!otherServices.contains("mixin")) {
+                mixinTransformationService = new MixinTransformationService();
+                mixinTransformationService.onLoad(env, otherServices);
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -100,14 +102,25 @@ public class MixinFixerTransformationService implements ITransformationService {
             launchPluginListField = LaunchPluginHandler.class.getDeclaredField("plugins");
             launchPluginListField.setAccessible(true);
 
+
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public void arguments(BiFunction<String, String, OptionSpecBuilder> argumentBuilder) {
+        if(mixinTransformationService != null) mixinTransformationService.arguments(argumentBuilder);
+    }
+
+    @Override
+    public void argumentValues(OptionResult option) {
+        if(mixinTransformationService != null) mixinTransformationService.argumentValues(option);
+    }
+
     @Nonnull
     @Override
     public List<ITransformer> transformers() {
-        return new ArrayList<>();
+        return ImmutableList.<ITransformer>of();
     }
 }
