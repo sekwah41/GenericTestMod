@@ -3,6 +3,7 @@ package com.sekwah.generictestmod.launch;
 import com.google.common.collect.ImmutableList;
 import cpw.mods.modlauncher.LaunchPluginHandler;
 import cpw.mods.modlauncher.Launcher;
+import cpw.mods.modlauncher.ServiceLoaderStreamUtils;
 import cpw.mods.modlauncher.api.IEnvironment;
 import cpw.mods.modlauncher.api.ITransformationService;
 import cpw.mods.modlauncher.api.ITransformer;
@@ -11,12 +12,12 @@ import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
 import joptsimple.OptionSpecBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.spongepowered.asm.launch.MixinLaunchPlugin;
 import org.spongepowered.asm.launch.MixinTransformationService;
-import org.spongepowered.asm.launch.platform.MixinPlatformAgentMinecraftForge;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.BiFunction;
@@ -32,6 +33,10 @@ public class MixinFixerTransformationService implements ITransformationService {
     private Map<String, ILaunchPluginService> pluginList;
 
     private MixinTransformationService mixinTransformationService;
+
+    Marker MODLAUNCHER = MarkerManager.getMarker("MODLAUNCHER");
+    Marker CLASSLOADING = MarkerManager.getMarker("CLASSLOADING").addParents(MODLAUNCHER);
+    Marker LAUNCHPLUGIN = MarkerManager.getMarker("LAUNCHPLUGIN").addParents(MODLAUNCHER);
 
     @Nonnull
     @Override
@@ -56,7 +61,16 @@ public class MixinFixerTransformationService implements ITransformationService {
 
         // Don't grab this before in case someone else does something stupid such as replacing the list.
         // If mixins are detected skip any other processing so that whatever other plugin that has registered it
-        // can take over.
+        // can take over
+
+        LOGGER.info("Checking services");
+        ServiceLoader<ILaunchPluginService> services = ServiceLoaderStreamUtils.errorHandlingServiceLoader(ILaunchPluginService.class,
+                e->LOGGER.fatal(MODLAUNCHER, "Encountered serious error loading launch plugin service. Things will not work well", e));
+        Map<String, ILaunchPluginService> plugins = ServiceLoaderStreamUtils.toMap(services, ILaunchPluginService::name);
+        for(Map.Entry<String, ILaunchPluginService> plugin : plugins.entrySet()) {
+            LOGGER.info("{} test {}", plugin.getKey(), plugin.getValue());
+        }
+
         LOGGER.info("Looking to add mixins");
         try {
             launchPlugins = (LaunchPluginHandler) launchPluginsField.get(Launcher.INSTANCE);
