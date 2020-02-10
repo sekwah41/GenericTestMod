@@ -24,6 +24,7 @@ archivesBaseName = project.modid
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 repositories {
+    mavenCentral()
     maven {
         url "https://maven.tterrag.com/"
     }
@@ -119,6 +120,7 @@ dependencies {
     //implementation "org.spongepowered:mixin:0.8-SNAPSHOT"
 
     include("org.spongepowered:mixin:0.8")
+    include('org.ow2.asm:asm-debug-all:5.2')
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
