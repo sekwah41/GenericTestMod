@@ -37,6 +37,7 @@ minecraft {
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
     // http://export.mcpbot.bspk.rs/
+    // We are using mixed in ours just because sometimes the mcp mappings can be behind with updates.
     mappings channel: 'snapshot', version: project.mcp_mapping
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -120,10 +121,10 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.1.1'
 
-    //implementation "org.spongepowered:mixin:0.8-SNAPSHOT"
+    implementation "org.spongepowered:mixin:0.8-SNAPSHOT"
 
-    includePlusMeta("org.spongepowered:mixin:0.8")
-    include('org.ow2.asm:asm-debug-all:5.2')
+    //include("org.spongepowered:mixin:0.8")
+    //include('org.ow2.asm:asm-debug-all:5.2')
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -152,7 +153,7 @@ mixin {
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
 
-    // To add the packages directly
+    // Was to try doing the spongepowered abuse though that is messy and not recommended.
     /*from ((configurations.include).findAll({
         it.isDirectory() || it.name.endsWith(".jar")
     }).collect({
@@ -163,20 +164,9 @@ jar {
         exclude("META-INF/MUMFREY.RSA")
         exclude("META-INF/MUMFREY.SF")
     }*/
-    from ((configurations.includePlusMeta).findAll({
-        it.isDirectory() || it.name.endsWith(".jar")
-    }).collect({
-        it.isDirectory() ? it : zipTree(it)
-    })) {
-        exclude("org/**")
-        exclude("META-INF/services/cpw.mods.modlauncher.api.ITransformationService")
-        exclude("META-INF/services/cpw.mods.modlauncher.serviceapi.ILaunchPluginService")
-        exclude("META-INF/MUMFREY.RSA")
-        exclude("META-INF/MUMFREY.SF")
-    }
 
-    // To add the jar's directly
-    from configurations.include.collect()
+    // To add the jar's directly in case you want to do stuff another way
+    //from configurations.include.collect()
 
     manifest {
         attributes([
