@@ -36,9 +36,8 @@ be ignored by a client though at least you can still play with it for now.
 JSCoreMod
 
 ## Mixins Notice
-May look at making a cleaner workaround than things such as Mixin
-
-If I make anything to do it I will update this readme
+Lex is currently actively choosing not to ship Mixin's with forge. This looks like it will change once Mumfrey deems them
+stable enough to work in forge.
 
 ## Mappings
 This example uses mixed though if you are used to yarn you can change the keyword from mixed to yarn.
