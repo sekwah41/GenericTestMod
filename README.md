@@ -27,13 +27,14 @@ Ore Generation
 Feature Generation  
 Custom Features  
 AccessTransformers  
+JSCoreMod - [Good reference for example scripts](https://github.com/MinecraftForge/CoreMods/tree/e6fed88bfcb29bc062c04310f18ebe2777582d03/src/test/javascript)
 
 ### Not fully supported examples
 **Forge Mixins** - Waiting for official implementation, for now only works in dev, for now if you build mods mixins will just
 be ignored by a client though at least you can still play with it for now.
 
 ### Examples to do
-JSCoreMod
+
 
 ## Mixins Notice
 Lex is currently actively choosing not to ship Mixin's with forge. This looks like it will change once Mumfrey deems them

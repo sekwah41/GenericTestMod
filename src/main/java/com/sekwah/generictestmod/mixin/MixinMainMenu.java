@@ -12,7 +12,7 @@ public class MixinMainMenu {
 
     @Inject(method = "init()V", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
-        GenericTestMod.LOGGER.debug("MAIN MENU INIT");
+        GenericTestMod.LOGGER.debug("MAIN MENU INIT MIXIN");
     }
 
 }
