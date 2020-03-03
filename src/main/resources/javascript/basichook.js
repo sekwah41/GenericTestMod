@@ -1,5 +1,7 @@
 // Designed to function similar to the mixin "RETURN"
 function hookAtHead(method) {
+
+
     // TODO get first and inject before that
 }
 

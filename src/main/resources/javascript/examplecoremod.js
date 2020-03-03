@@ -43,13 +43,18 @@ function initializeCoreMod() {
 
                 var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
 
+                print("HERE", Java);
+
                 var Opcodes = Java.type('org.objectweb.asm.Opcodes');
 
                 var basicHook = ASMAPI.loadFile("basichook.js");
 
-                var methodList = ASMAPI.listOf(
+                var newList = ASMAPI.listOf(
                     ASMAPI.buildMethodCall("com/sekwah/generictestmod/coremod/CoreModTestCalls", "testCall", "()V",
                         ASMAPI.MethodType.STATIC));
+                if (ASMAPI.insertInsnList(method, ASMAPI.MethodType.STATIC, "cpw/mods/TestClass", "testMethod1", "()J", newList, ASMAPI.InsertMode.INSERT_BEFORE) === false) {
+                    throw "MethodInsnNode for insert before on testMethod1 not found!";
+                }
 
                 /*if(ASMAPI.insertInsnList(method, ASMAPI.MethodType.STATIC, "")) {
                     throw "MethodInsnNode for init not found";
