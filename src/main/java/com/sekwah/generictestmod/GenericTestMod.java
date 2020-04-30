@@ -23,6 +23,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
+/**
+ * For asm reference {@link net.minecraftforge.coremod.api.ASMAPI}
+ */
 @Mod("generictestmod")
 public class GenericTestMod {
 

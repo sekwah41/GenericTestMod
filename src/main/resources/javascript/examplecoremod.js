@@ -13,8 +13,11 @@ function initializeCoreMod() {
     // Locations are relative to the resources folder. Not the current file.
     ASMAPI.loadFile('javascript/jsasmhelper.js');
 
-    print("TestPrint", jsASMHelper);
-    print("API PRINT", jsASMHelper.api);
+    jsASMHelper.log.info("Here is an info message");
+    jsASMHelper.log.warn("Here is a warning message");
+    jsASMHelper.log.error("Here is an error message");
+    jsASMHelper.log.debug("Here is a debug message");
+    jsASMHelper.log.fatal("Here is a fatal message");
 
     otherFunctionToRun();
 
@@ -42,7 +45,7 @@ function initializeCoreMod() {
      * METHOD - org.objectweb.asm.tree.MethodNode
      */
     return {
-        'generictestmethod': {
+        'mainmenuinit': {
             'target': {
                 'type': 'METHOD',
                 'class': 'net.minecraft.client.gui.screen.MainMenuScreen',
@@ -50,23 +53,16 @@ function initializeCoreMod() {
                 'methodDesc': '()V'
             },
             'transformer': function(method) {
+                jsASMHelper.log.info("Transformed init()V");
+                jsASMHelper.log.info(method);
 
-                var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
+                jsASMHelper.class("com/sekwah/generictestmod/coremod/CoreModTestCalls")
+                    .method("testCall")
+                    .voidDesc().print();
 
-                var Opcodes = Java.type('org.objectweb.asm.Opcodes');
-
-                var newList = ASMAPI.listOf(
-                    ASMAPI.buildMethodCall("com/sekwah/generictestmod/coremod/CoreModTestCalls", "testCall", "()V",
-                        ASMAPI.MethodType.STATIC));
-                if (ASMAPI.insertInsnList(method, ASMAPI.MethodType.STATIC, "net/minecraft/client.gui/screen/MainMenuScreen", "init", "()V", newList, ASMAPI.InsertMode.INSERT_BEFORE) === false) {
-                    throw "MethodInsnNode for insert before on init not found!";
-                }
-
-                /*if(ASMAPI.insertInsnList(method, ASMAPI.MethodType.STATIC, "")) {
-                    throw "MethodInsnNode for init not found";
-                }*/
-
-                print("Transformed init()V");
+                // jsASMHelper.createMethodCall()
+                //     .class("com/sekwah/generictestmod/coremod/CoreModTestCalls")
+                //     .method("testCall").void();
 
                 return method;
             }

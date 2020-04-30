@@ -27,48 +27,243 @@ Changes
  *
  * When writing js in these files remember it is heavily outdated. You cant run any fancy new JS. I believe it is ES5
  * with a little of ES6 implemented though I may be wrong.
+ *
+ * Have to use the old method of creating classes.
  */
 
 /**
+ * Useful to check
+ * https://github.com/MinecraftForge/CoreMods/blob/master/src/main/java/net/minecraftforge/coremod/api/ASMAPI.java
  * Setup library object to allow easier more clear calling
  * TODO map out functions once it has been decided what the basics of this file will do.
- * @return any
  */
 function setupJSASMHelper (){
     var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
 
-    function hookAtHead(method) {
+    /**
+     *
+     * @return {class: getClass} if the insert was successful.
+     * /
+    function insertBeforeMethod(method) {
 
-
-        // TODO get first and inject before that
     }
 
+    // function hookAtHead(method) {
+    //
+    //
+    //     // TODO get first and inject before that
+    // }
+
 // Designed to function similar to the mixin "HEAD"
-    function hookAtReturn(method) {
+//     function hookAtReturn(method) {
+//
+//         var Opcodes = Java.type('org.objectweb.asm.Opcodes');
+//
+//         // TODO Get opcode of return and inject at all before that.
+//
+//         /*var arrayLength = method.instructions.size();
+//         for (var i = 0; i < arrayLength; ++i) {
+//             var instruction = method.instructions.get(i);
+//             print(instruction);
+//             print(instruction.getOpcode());
+//             /!*if (instruction.getOpcode() == Opcodes.ICONST_1) {
+//                 var InsnNode = Java.type('org.objectweb.asm.tree.InsnNode');
+//                 var newInstruction = new InsnNode(Opcodes.ICONST_0);
+//                 method.instructions.insertBefore(instruction, newInstruction);
+//                 method.instructions.remove(instruction);
+//                 print("Transformed!");
+//                 break;
+//             }*!/
+//         }*/
+//     }
+    /**
+     * Possibly rewrite as a json builder so that
+     V                          void
+     Z                          boolean
+     B                          byte
+     C                          char
+     S                          short
+     I                          int
+     J                          long
+     F                          float
+     D                          double
+     Lfull/path/Class;          full/path/Class
+     */
+    function QueryConstructor(clazz) {
+        this._class = clazz;
+        this._method;
+        this._descriptor;
+        this._methodType = ASMAPI.MethodType.STATIC;
 
-        var Opcodes = Java.type('org.objectweb.asm.Opcodes');
+        // Class
+        /**
+         * @return QueryConstructor
+         */
+        this.class = function(clazz) {
+            this._class = clazz;
+            return this;
+        }
 
-        // TODO Get opcode of return and inject at all before that.
+        // Method
+        /**
+         * @return QueryConstructor
+         */
+        this.method = function(method) {
+            this._method = method;
+            return this;
+        }
 
-        /*var arrayLength = method.instructions.size();
-        for (var i = 0; i < arrayLength; ++i) {
-            var instruction = method.instructions.get(i);
-            print(instruction);
-            print(instruction.getOpcode());
-            /!*if (instruction.getOpcode() == Opcodes.ICONST_1) {
-                var InsnNode = Java.type('org.objectweb.asm.tree.InsnNode');
-                var newInstruction = new InsnNode(Opcodes.ICONST_0);
-                method.instructions.insertBefore(instruction, newInstruction);
-                method.instructions.remove(instruction);
-                print("Transformed!");
-                break;
-            }*!/
-        }*/
+        // Descriptors
+        /**
+         * @return QueryConstructor
+         */
+        this.desc = function(descriptor) {
+            this._descriptor = descriptor;
+            return this;
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.classDesc = function(classPath) {
+            return this.desc("L" + classPath + ";");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.voidDesc = function() {
+            return this.desc("()V");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.boolDesc = function() {
+            return this.desc("()Z");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.byteDesc = function() {
+            return this.desc("()B");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.charDesc = function() {
+            return this.desc("()C");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.shortDesc = function() {
+            return this.desc("()S");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.intDesc = function() {
+            return this.desc("()I");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.longDesc = function() {
+            return this.desc("()L");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.floatDesc = function() {
+            return this.desc("()F");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.doubleDesc = function() {
+            return this.desc("()D");
+        }
+
+        /**
+         * @return QueryConstructor
+         */
+        this.print = function() {
+            print("Debug info for QueryConstructor");
+            print("class:", this._class);
+            print("method:", this._method);
+            print("descriptor:", this._descriptor);
+            print("methodType:", this._methodType);
+            return this;
+        }
+
+        // What to do with the data collected.
+    }
+
+    /**
+     * @return QueryConstructor
+     */
+    function createQueryConstructor() {
+        return new QueryConstructor();
+    }
+
+    /**
+     * @return QueryConstructor
+     */
+    function createQueryConstructorWithClass(clazz) {
+        return new QueryConstructor(clazz)
+    }
+
+    /**
+     * @returns {{warn: warn, debug: debug, error: error, info: info, fatal: fatal}}
+     */
+    function setupLogger() {
+        function info(message) {
+            ASMAPI.log('INFO', message);
+        }
+        function warn(message) {
+            ASMAPI.log('WARN', message);
+        }
+        function error(message) {
+            ASMAPI.log('ERROR', message);
+        }
+        function fatal(message) {
+            ASMAPI.log('FATAL', message);
+        }
+        function debug(message) {
+            ASMAPI.log('DEBUG', message);
+        }
+        function trace(message) {
+            ASMAPI.log('TRACE', message);
+        }
+        return {
+            info: info,
+            warn: warn,
+            error: error,
+            fatal: fatal,
+            debug: debug,
+        };
     }
 
     return {
-        hookAtHead: hookAtHead,
-        hookAtReturn: hookAtReturn
+        log: setupLogger(),
+        ASMAPI: ASMAPI,
+        qc: createQueryConstructor,
+        class: createQueryConstructorWithClass,
+        // This part is just for easier mapping out for js autocomplete
+        methodType: {
+            VIRTUAL: ASMAPI.MethodType.VIRTUAL,
+            SPECIAL: ASMAPI.MethodType.SPECIAL,
+            STATIC: ASMAPI.MethodType.STATIC,
+            INTERFACE: ASMAPI.MethodType.INTERFACE,
+        }
     };
 }
 
