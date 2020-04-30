@@ -1,12 +1,22 @@
 
-function otherStuffYouCanRun() {
+function otherFunctionToRun() {
     print("More stuff from the test script")
 }
 
 function initializeCoreMod() {
     print("Running coremod method script!");
 
-    otherStuffYouCanRun();
+    var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
+
+    ASMAPI.log("INFO", "Testing log function");
+
+    // Locations are relative to the resources folder. Not the current file.
+    ASMAPI.loadFile('javascript/jsasmhelper.js');
+
+    print("TestPrint", jsASMHelper);
+    print("API PRINT", jsASMHelper.api);
+
+    otherFunctionToRun();
 
     /**
      * You can use the mixin or at reference for help e.g. net.minecraft.client.gui.screen.MainMenuScreen init()V #init
@@ -43,17 +53,13 @@ function initializeCoreMod() {
 
                 var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
 
-                print("HERE", Java);
-
                 var Opcodes = Java.type('org.objectweb.asm.Opcodes');
-
-                var basicHook = ASMAPI.loadFile("basichook.js");
 
                 var newList = ASMAPI.listOf(
                     ASMAPI.buildMethodCall("com/sekwah/generictestmod/coremod/CoreModTestCalls", "testCall", "()V",
                         ASMAPI.MethodType.STATIC));
-                if (ASMAPI.insertInsnList(method, ASMAPI.MethodType.STATIC, "cpw/mods/TestClass", "testMethod1", "()J", newList, ASMAPI.InsertMode.INSERT_BEFORE) === false) {
-                    throw "MethodInsnNode for insert before on testMethod1 not found!";
+                if (ASMAPI.insertInsnList(method, ASMAPI.MethodType.STATIC, "net/minecraft/client.gui/screen/MainMenuScreen", "init", "()V", newList, ASMAPI.InsertMode.INSERT_BEFORE) === false) {
+                    throw "MethodInsnNode for insert before on init not found!";
                 }
 
                 /*if(ASMAPI.insertInsnList(method, ASMAPI.MethodType.STATIC, "")) {

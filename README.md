@@ -14,9 +14,9 @@ Google, GitHub and StackOverflow are your friend. If your problem can be easily 
 on where you ask. Try not to waste peoples time just to save yourself some time with your questions. Also if you don't
 get a quick response don't go just randomly pinging people or demanding help else you may be banned depending on the discord.
 
-My Discord: https://discord.gg/fAJ3xJg (use #tech-and-code I will make a specific channel if a lot of people are joining)
-MDC Discord: https://discord.gg/T5MGNBB (use #forge-dev-help)
-MMD Discord: https://discord.mcmoddev.com/ (use #mc-development)
+My Discord: https://discord.gg/fAJ3xJg (use #tech-and-code I will make a specific channel if a lot of people are joining)  
+MDC Discord: https://discord.gg/T5MGNBB (use #forge-dev-help)  
+MMD Discord: https://discord.mcmoddev.com/ (use #mc-development)  
 Forge Project Discord: https://discord.gg/UvedJ9m (use #modder-support-115)
 
 If you want me specifically for something ping me on a discord or message on my discord.
@@ -65,7 +65,15 @@ Adding to mappings is handled through pull requests.
 
 The META-INF will be ignored in the resources though it is needed to properly link mixins for now without anything else.
 
+## Useful Tools/Info
+Hotswapping that I didn't know existed for far too long
+https://dcevm.github.io/.
+Check https://aur.archlinux.org/packages/jdk8-openjdk-dcevm for an easy install on arch.
+
 ## Will you do fabric examples?
 For now no, though there is a lot of help on the fabric discord https://discord.gg/v6v4pMv
 
-While it is fun to mod the new forge code wise is actually really nice,
+While it is fun to mod the new forge code wise is actually really nice.
+
+We are going to take a look at mapping the MCP names over to fabric for easier porting of mods as Fabric has a much
+better decompiling system which can support a lot more changes.

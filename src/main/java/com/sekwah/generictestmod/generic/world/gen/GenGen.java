@@ -13,9 +13,7 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 
@@ -43,17 +41,17 @@ public class GenGen {
         )));
     }
 
-    public static Set<Biome> getBiomes(BiomeDictionary.Type type, BiomeDictionary.Type... filterTypes) {
-        Set<Biome> biomes = BiomeDictionary.getBiomes(type);
-        if(filterTypes.length == 0) {
-            return biomes;
+    public static Set<Biome> getBiomes(BiomeDictionary.Type... biomeTypeArgs) {
+        if (biomeTypeArgs.length == 0) {
+            return Collections.emptySet();
         }
-        Set<Biome> filtering = new HashSet<Biome>();
-        filtering.addAll(biomes);
-        for (BiomeDictionary.Type fType:
-                filterTypes) {
-            Set<Biome> filterBiomes = BiomeDictionary.getBiomes(type);
-            filtering.retainAll(filterBiomes);
+        List<BiomeDictionary.Type> biomeTypes = Arrays.asList(biomeTypeArgs);
+        Iterator<BiomeDictionary.Type> it = biomeTypes.iterator();
+        Set<Biome> biomes = BiomeDictionary.getBiomes(it.next());
+        Set<Biome> filtering = new HashSet<Biome>(biomes);
+        while(it.hasNext()) {
+            biomes = BiomeDictionary.getBiomes(it.next());
+            filtering.retainAll(biomes);
         }
         return filtering;
     }
