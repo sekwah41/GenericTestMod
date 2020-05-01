@@ -7,8 +7,12 @@ import com.sekwah.generictestmod.GenericTestMod;
  */
 public class CoreModTestCalls {
 
-    public static void testCall() {
-        GenericTestMod.LOGGER.debug("MAIN MENU INIT ASM");
+    public static void basicTestCall() {
+        GenericTestMod.LOGGER.debug("Main menu basic insert trigger ASM");
+    }
+
+    public static void classTestCall() {
+        GenericTestMod.LOGGER.debug("Main menu class insert trigger ASM");
     }
 
 }

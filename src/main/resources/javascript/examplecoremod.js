@@ -1,10 +1,5 @@
 
-function otherFunctionToRun() {
-    print("More stuff from the test script")
-}
-
 function initializeCoreMod() {
-    print("Running coremod method script!");
 
     var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
 
@@ -13,13 +8,11 @@ function initializeCoreMod() {
     // Locations are relative to the resources folder. Not the current file.
     ASMAPI.loadFile('javascript/jsasmhelper.js');
 
-    jsASMHelper.log.info("Here is an info message");
-    jsASMHelper.log.warn("Here is a warning message");
-    jsASMHelper.log.error("Here is an error message");
-    jsASMHelper.log.debug("Here is a debug message");
-    jsASMHelper.log.fatal("Here is a fatal message");
-
-    otherFunctionToRun();
+    jsASMHelper.logger.info("Here is an info message");
+    jsASMHelper.logger.warn("Here is a warning message");
+    jsASMHelper.logger.error("Here is an error message");
+    jsASMHelper.logger.debug("Here is a debug message");
+    jsASMHelper.logger.fatal("Here is a fatal message");
 
     /**
      * You can use the mixin or at reference for help e.g. net.minecraft.client.gui.screen.MainMenuScreen init()V #init
@@ -49,22 +42,45 @@ function initializeCoreMod() {
             'target': {
                 'type': 'METHOD',
                 'class': 'net.minecraft.client.gui.screen.MainMenuScreen',
+                //'methodName': Java.type("net.minecraftforge.coremod.api.ASMAPI").mapMethod('funcname'),
                 'methodName': 'init',
                 'methodDesc': '()V'
             },
             'transformer': function(method) {
-                jsASMHelper.log.info("Transformed init()V");
-                jsASMHelper.log.info(method);
+                jsASMHelper.logger.info("Transformed init()V");
 
-                jsASMHelper.class("com/sekwah/generictestmod/coremod/CoreModTestCalls")
-                    .method("testCall")
-                    .voidDesc().print();
+                var methodCall = jsASMHelper.class("com/sekwah/generictestmod/coremod/CoreModTestCalls")
+                     .method("basicTestCall")
+                     .voidDesc();
 
-                // jsASMHelper.createMethodCall()
-                //     .class("com/sekwah/generictestmod/coremod/CoreModTestCalls")
-                //     .method("testCall").void();
+                methodCall.insertInto(method);
+
+                // var methodCall = jsASMHelper.class("com/sekwah/generictestmod/coremod/CoreModTestCalls")
+                //     .method("testCall")
+                //     .voidDesc().print().buildMethodCall();
+                //
+                // //net.minecraft.client.gui.screen.MainMenuScreen init()V #init
+                // jsASMHelper.class("net/minecraft/client/gui/screen/MainMenuScreen")
+                //     .method("init").voidDesc().node(method).insertMethodBefore(methodCall);
 
                 return method;
+            }
+        },
+        'mainmenuclass': {
+            'target': {
+                'type': 'CLASS',
+                'name': 'net.minecraft.client.gui.screen.MainMenuScreen',
+            },
+            'transformer': function (classNode) {
+                jsASMHelper.logger.info(classNode);
+                jsASMHelper.logger.info("Injecting from class scope");
+                var methodCall = jsASMHelper.class("com/sekwah/generictestmod/coremod/CoreModTestCalls")
+                     .method("classTestCall")
+                     .voidDesc().print().buildMethodCall();
+
+                /*jsASMHelper.class("net/minecraft/client/gui/screen/MainMenuScreen")
+                     .method("init").voidDesc().node(classNode).insertMethodBefore(methodCall);*/
+                return classNode;
             }
         }
     }

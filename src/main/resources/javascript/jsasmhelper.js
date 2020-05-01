@@ -41,6 +41,39 @@ function setupJSASMHelper (){
     var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
 
     /**
+     * @returns {{warn: warn, debug: debug, error: error, info: info, fatal: fatal}}
+     */
+    var logger = function() {
+        function info(message) {
+            ASMAPI.log('INFO', message);
+        }
+        function warn(message) {
+            ASMAPI.log('WARN', message);
+        }
+        function error(message) {
+            ASMAPI.log('ERROR', message);
+        }
+        function fatal(message) {
+            ASMAPI.log('FATAL', message);
+        }
+        function debug(message) {
+            ASMAPI.log('DEBUG', message);
+        }
+        function trace(message) {
+            ASMAPI.log('TRACE', message);
+        }
+        return {
+            info: info,
+            warn: warn,
+            error: error,
+            fatal: fatal,
+            debug: debug,
+        };
+    }();
+
+
+
+    /**
      *
      * @return {class: getClass} if the insert was successful.
      * /
@@ -94,6 +127,22 @@ function setupJSASMHelper (){
         this._method;
         this._descriptor;
         this._methodType = ASMAPI.MethodType.STATIC;
+        this._methodNode;
+        this._classNode;
+
+        /**
+         * Copies the data so any further edits wont alter the old constructors
+         * @return QueryConstructor
+         */
+        this.clone = function(){
+            var qc = new QueryConstructor(this._class);
+            qc._method = this._method;
+            qc._descriptor = this._descriptor;
+            qc._methodType = this._methodType;
+            qc._methodNode = this._methodNode;
+            qc._classNode = this._classNode;
+            return qc;
+        }
 
         // Class
         /**
@@ -113,6 +162,13 @@ function setupJSASMHelper (){
             return this;
         }
 
+        /**
+         * @return QueryConstructor
+         */
+        this.methodNode = function(node) {
+            this._methodNode = node;
+            return this;
+        }
         // Descriptors
         /**
          * @return QueryConstructor
@@ -205,6 +261,65 @@ function setupJSASMHelper (){
         }
 
         // What to do with the data collected.
+        /**
+         * Needs class, method, descriptor and methodType is optional.
+         * @returns {*}
+         */
+        this.buildMethodCall = function() {
+            if(!this._class) logger.error("buildMethodCall: Missing class")
+            if(!this._method) logger.error("buildMethodCall: Missing method");
+            if(!this._descriptor) logger.error("buildMethodCall: Missing descriptor");
+            if(!this._methodType) logger.error("buildMethodCall: Missing methodType");
+
+            if(this._class && this._method && this._descriptor && this._methodType) {
+                logger.debug("Building new method.");
+                return ASMAPI.buildMethodCall(this._class, this._method, this._descriptor, this._methodType);
+            }
+        }
+
+        this.insertInto = function(node) {
+            node.instructions.insert(this.buildMethodCall());
+            return this;
+        }
+
+        // TODO add class based methods. Though these should do for now for injecting hooks into places
+
+        /**
+         * @param methodCall
+         * @param insertMode
+         * @return boolean if the method was inserted successfully
+         */
+        this.insertMethod = function(methodCall, insertMode) {
+            return ASMAPI.insertInsnList(this._methodNode, this._methodType, this._class, this._method, this._descriptor,
+                ASMAPI.listOf(methodCall), insertMode);
+
+        }
+
+        this.insertMethodBefore = function(methodCall) {
+            return this.insertMethod(methodCall, ASMAPI.InsertMode.INSERT_BEFORE);
+        }
+
+        this.insertMethodAfter = function(methodCall) {
+            return this.insertMethod(methodCall, ASMAPI.InsertMode.INSERT_AFTER);
+        }
+
+        this.insertMethodReplace = function(methodCall) {
+            return this.insertMethod(methodCall, ASMAPI.InsertMode.REMOVE_ORIGINAL);
+        }
+    }
+
+    function outputNodeInstructions(node) {
+        var arrayLength = node.instructions.size();
+        for (var i = 0; i < arrayLength; ++i) {
+            var instruction = node.instructions.get(i);
+            print("Instruction")
+            print(instruction);
+            print(instruction.getOpcode());
+            print(instruction.name);
+            print(instruction.desc);
+            if(instruction.next) print(instruction.next.owner);
+            print("")
+        }
     }
 
     /**
@@ -221,49 +336,11 @@ function setupJSASMHelper (){
         return new QueryConstructor(clazz)
     }
 
-    /**
-     * @returns {{warn: warn, debug: debug, error: error, info: info, fatal: fatal}}
-     */
-    function setupLogger() {
-        function info(message) {
-            ASMAPI.log('INFO', message);
-        }
-        function warn(message) {
-            ASMAPI.log('WARN', message);
-        }
-        function error(message) {
-            ASMAPI.log('ERROR', message);
-        }
-        function fatal(message) {
-            ASMAPI.log('FATAL', message);
-        }
-        function debug(message) {
-            ASMAPI.log('DEBUG', message);
-        }
-        function trace(message) {
-            ASMAPI.log('TRACE', message);
-        }
-        return {
-            info: info,
-            warn: warn,
-            error: error,
-            fatal: fatal,
-            debug: debug,
-        };
-    }
-
     return {
-        log: setupLogger(),
-        ASMAPI: ASMAPI,
+        logger: logger,
         qc: createQueryConstructor,
         class: createQueryConstructorWithClass,
-        // This part is just for easier mapping out for js autocomplete
-        methodType: {
-            VIRTUAL: ASMAPI.MethodType.VIRTUAL,
-            SPECIAL: ASMAPI.MethodType.SPECIAL,
-            STATIC: ASMAPI.MethodType.STATIC,
-            INTERFACE: ASMAPI.MethodType.INTERFACE,
-        }
+        printNode: outputNodeInstructions
     };
 }
 
