@@ -15,6 +15,8 @@ public class DataGenerators {
 
         /**
          * Packages on data are located at {@link net.minecraft.data}
+         *
+         * TODO make basic examples for each fully working.
          */
 
 
