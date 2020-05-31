@@ -18,8 +18,6 @@ public class DataGenerators {
          *
          * TODO make basic examples for each fully working.
          */
-
-
         if(event.includeServer()) {
             gen.addProvider(new RecipeGen(gen));
             gen.addProvider(new LootTableGen(gen));

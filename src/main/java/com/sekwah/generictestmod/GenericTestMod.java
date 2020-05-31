@@ -1,6 +1,7 @@
 package com.sekwah.generictestmod;
 
 import com.sekwah.generictestmod.generic.block.GenericBlocks;
+import com.sekwah.generictestmod.generic.items.GenericItems;
 import com.sekwah.generictestmod.generic.world.gen.GenGen;
 import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
@@ -46,13 +47,14 @@ public class GenericTestMod {
         // Register the doClientStuff method for modloading
         eventBus.addListener(this::doClientStuff);
 
-        /*eventBus.addGenericListener(Block.class, GenericBlocks::registerBlocks);
-        eventBus.addGenericListener(Item.class, GenericBlocks::registerBlockItems);*/
+        eventBus.addListener(this::onServerStarting);
+
+
+        GenericItems.register(eventBus);
+
         GenericBlocks.register(eventBus);
 
         GenericFeatures.register(eventBus);
-
-        eventBus.addListener(this::onServerStarting);
 
     }
 
