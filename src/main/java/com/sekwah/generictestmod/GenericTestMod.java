@@ -4,14 +4,10 @@ import com.sekwah.generictestmod.generic.block.GenericBlocks;
 import com.sekwah.generictestmod.generic.items.GenericItems;
 import com.sekwah.generictestmod.generic.world.gen.GenGen;
 import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
-import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.biome.Biomes;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -21,7 +17,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.stream.Collectors;
 
 /**
@@ -55,6 +50,14 @@ public class GenericTestMod {
         GenericBlocks.register(eventBus);
 
         GenericFeatures.register(eventBus);
+
+        /*
+            Wrap your code in this stuff so it doesn't crash if its not loaded. If you get crashes for missing classes
+            you have not properly separated your code. This goes for server errors and missing mods
+         */
+        if(ModList.get().isLoaded("jei")) {
+
+        }
 
     }
 

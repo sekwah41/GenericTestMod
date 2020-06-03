@@ -22,13 +22,13 @@ public class GenGen {
     public static void addFeatures() {
         getBiomes(HOT, OVERWORLD).forEach(biome -> biome.addFeature(
                 GenerationStage.Decoration.UNDERGROUND_ORES,
-                Feature.ORE.configure(
+                Feature.ORE.withConfiguration(
                         new OreFeatureConfig(
                                 OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                 Blocks.OAK_LEAVES.getDefaultState(),
                                 4 // deposit size
                         )
-                ).createDecoratedFeature(Placement.COUNT_RANGE.configure(
+                ).withPlacement(Placement.COUNT_RANGE.configure(
                         new CountRangeConfig(/* Count, MinHeight, MaxHeightBase, MaxHeight */ 20, 30, 0, 128)
                 ))
         ));
@@ -36,8 +36,8 @@ public class GenGen {
 
         getBiomes(HOT, OVERWORLD).forEach(biome -> biome.addFeature(
                 GenerationStage.Decoration.VEGETAL_DECORATION,
-                GenericFeatures.SOLID_FANCY_TREE_FEATURE.get().configure(CustomFeatures.OBSIDIAN_TREE_CONFIG)
-                        .createDecoratedFeature(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(8))
+                GenericFeatures.SOLID_FANCY_TREE_FEATURE.get().withConfiguration(CustomFeatures.OBSIDIAN_TREE_CONFIG)
+                        .withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(8))
         )));
     }
 

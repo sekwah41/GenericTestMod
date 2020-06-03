@@ -14,7 +14,7 @@ import java.util.Random;
 public class ObsidianTree extends Tree {
 
     @Nullable
-    protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random p_225546_1_, boolean p_225546_2_) {
-        return GenericFeatures.SOLID_FANCY_TREE_FEATURE.get().configure(/*DefaultBiomeFeatures.BIRCH_TREE_CONFIG*/CustomFeatures.OBSIDIAN_TREE_CONFIG);
+    protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random rand, boolean switcharoo) {
+        return GenericFeatures.SOLID_FANCY_TREE_FEATURE.get().withConfiguration(/*DefaultBiomeFeatures.BIRCH_TREE_CONFIG*/CustomFeatures.OBSIDIAN_TREE_CONFIG);
     }
 }

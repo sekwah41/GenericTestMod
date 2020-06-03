@@ -20,7 +20,8 @@ public class SolidFancyTreeFeature extends FancyTreeFeature {
         super(p_i225803_1_);
     }
 
-    public int makeOrCheckBranch(IWorldGenerationReader worldGenerationReader, Random random, BlockPos blockPos, BlockPos blockPos2, boolean p_227235_5_, Set<BlockPos> blockPosSet, MutableBoundingBox boundingBox, TreeFeatureConfig treeFeatureConfig) {
+    // makeOrCheckBranch
+    public int func_227216_a_(IWorldGenerationReader worldGenerationReader, Random random, BlockPos blockPos, BlockPos blockPos2, boolean p_227235_5_, Set<BlockPos> blockPosSet, MutableBoundingBox boundingBox, TreeFeatureConfig treeFeatureConfig) {
         if (!p_227235_5_ && Objects.equals(blockPos, blockPos2)) {
             return -1;
         } else {
@@ -33,9 +34,9 @@ public class SolidFancyTreeFeature extends FancyTreeFeature {
             for(int lvt_14_1_ = 0; lvt_14_1_ <= lvt_10_1_; ++lvt_14_1_) {
                 BlockPos lvt_15_1_ = blockPos.add((double)(0.5F + (float)lvt_14_1_ * lvt_11_1_), (double)(0.5F + (float)lvt_14_1_ * lvt_12_1_), (double)(0.5F + (float)lvt_14_1_ * lvt_13_1_));
                 if (p_227235_5_) {
-                    this.setBlockState(worldGenerationReader, lvt_15_1_, (BlockState)treeFeatureConfig.trunkProvider.getBlockState(random, lvt_15_1_), boundingBox);
+                    this.setBlockState(worldGenerationReader, lvt_15_1_, treeFeatureConfig.trunkProvider.getBlockState(random, lvt_15_1_));
                     blockPosSet.add(lvt_15_1_);
-                } else if (!func_214587_a(worldGenerationReader, lvt_15_1_)) {
+                } else if (!isAir(worldGenerationReader, lvt_15_1_)) {
                     return lvt_14_1_;
                 }
             }

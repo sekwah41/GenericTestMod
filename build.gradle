@@ -2,20 +2,24 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = "https://repo.spongepowered.org/maven" }
+        maven {url "https://plugins.gradle.org/m2/"}
         jcenter()
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
         classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
+        classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: "java"
+apply plugin: "idea"
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "org.spongepowered.mixin"
+apply plugin: "com.wynprice.cursemaven"
 
 version = project.version
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -26,7 +30,10 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 repositories {
     mavenCentral()
     maven {
-        url "https://maven.tterrag.com/"
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+        url "https://minecraft.curseforge.com/api/maven/"
     }
 }
 
@@ -125,6 +132,13 @@ dependencies {
 
     implementation "org.spongepowered:mixin:0.8-SNAPSHOT"
 
+    // You can remove these though we've just added them as they are nice for dev and you can add some interesting things
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+
+    // Good example of how to add a curseforge mod as a dependancy
+    compile fg.deobf("curse.maven:hwyla:2880069")
+
     //include("org.spongepowered:mixin:0.8")
     //include('org.ow2.asm:asm-debug-all:5.2')
 
@@ -135,12 +149,6 @@ dependencies {
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // These dependencies get remapped to your current MCP mappings
-    // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
@@ -154,21 +162,6 @@ mixin {
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
-
-    // Was to try doing the spongepowered abuse though that is messy and not recommended.
-    /*from ((configurations.include).findAll({
-        it.isDirectory() || it.name.endsWith(".jar")
-    }).collect({
-        it.isDirectory() ? it : zipTree(it)
-    })) {
-        exclude("META-INF/services/cpw.mods.modlauncher.api.ITransformationService")
-        exclude("META-INF/services/cpw.mods.modlauncher.serviceapi.ILaunchPluginService")
-        exclude("META-INF/MUMFREY.RSA")
-        exclude("META-INF/MUMFREY.SF")
-    }*/
-
-    // To add the jar's directly in case you want to do stuff another way
-    //from configurations.include.collect()
 
     manifest {
         attributes([

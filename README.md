@@ -10,17 +10,11 @@ and depending on how much time I have will be making possibly some tutorials bas
 keep it up to date with best practices to use as a good example.
 
 ## Got an issue?
-Google, GitHub and StackOverflow are your friend. If your problem can be easily found there you may be ignored depending
-on where you ask. Try not to waste peoples time just to save yourself some time with your questions. Also if you don't
-get a quick response don't go just randomly pinging people or demanding help else you may be banned depending on the discord.
+Not my problem. These examples are here for you to learn from or have fun with.
+While you can get help from large portions of the community quite easily if you ask a stupid question you are going to get a stupid answer.
+Try to solve it yourself else you will never learn.
 
-My Discord: https://discord.gg/fAJ3xJg (use #tech-and-code I will make a specific channel if a lot of people are joining)  
-MDC Discord: https://discord.gg/T5MGNBB (use #forge-dev-help)  
-MMD Discord: https://discord.mcmoddev.com/ (use #mc-development)  
-Forge Project Discord: https://discord.gg/UvedJ9m (use #modder-support-115)
-
-If you want me specifically for something ping me on a discord or message on my discord.
-
+If you don't know java you are going to struggle.
 
 ### Examples
 Ore Generation  
@@ -35,29 +29,10 @@ be ignored by a client though at least you can still play with it for now.
 
 ### Examples to do
 
-
 ## Mixins Notice
-Lex is currently actively choosing not to ship Mixin's with forge. This looks like it will change once Mumfrey deems them
+Lex is currently actively choosing not to ship Mixin's with forge in its current state (as Mumfrey does not feel its in a good enough state).
+This looks like it will change once Mumfrey deems them.
 stable enough to work in forge.
-
-## Mappings
-This example uses mixed though if you are used to yarn you can change the keyword from mixed to yarn.
-
-More info on mixed/yarn on forge can be found here https://www.tterrag.com/yarn2mcp/
-
-This helps avoid getting unmapped functions though keep in mind some names will change which may be confusing though
-its a reasonable tradeoff for having less unnamed functions.
-
-#### Contributing to MCP mappings
-**Need to add info as I am not sure how to suggest mappings as of now**
-
-Someone who knows more about mcp feel free to add info here such as the process of updating mapping names if they are
-wrong or unmapped. Though this process will be changing soonish if I remember correctly.
-
-#### Contributing to YARN mappings
-Info can be found [here](https://github.com/FabricMC/yarn)
-
-Adding to mappings is handled through pull requests.
 
 ## Services in dev
 **I need to find a proper way to build MANIFEST to the src though for now copy from after a build to test**  
