@@ -14,7 +14,8 @@ Not my problem. These examples are here for you to learn from or have fun with.
 While you can get help from large portions of the community quite easily if you ask a stupid question you are going to get a stupid answer.
 Try to solve it yourself else you will never learn.
 
-If you don't know java you are going to struggle.
+If you don't know Java you are going to struggle, learning this way is not an ideal way to learn from scratch.
+Though playing with other peoples projects or altering existing code may help you, don't expect to instantly be able to make a lot of new content.
 
 ### Examples
 Ore Generation  
@@ -26,8 +27,6 @@ JSCoreMod - [Good reference for example scripts](https://github.com/MinecraftFor
 ### Not fully supported examples
 **Forge Mixins** - Waiting for official implementation, for now only works in dev, for now if you build mods mixins will just
 be ignored by a client though at least you can still play with it for now.
-
-### Examples to do
 
 ## Mixins Notice
 Lex is currently actively choosing not to ship Mixin's with forge in its current state (as Mumfrey does not feel its in a good enough state).

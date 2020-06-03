@@ -15,9 +15,8 @@ public class GenericFeatures {
 
     private static final DeferredRegister<Feature<?>> FEATURE_REGISTER = new DeferredRegister<>(ForgeRegistries.FEATURES, MOD_ID);
 
-    // func_227338_a_ returns a config
     public static RegistryObject<SolidFancyTreeFeature> SOLID_FANCY_TREE_FEATURE = FEATURE_REGISTER.register("solid_fancy_tree",
-            () -> new SolidFancyTreeFeature(TreeFeatureConfig::func_227338_a_));
+            () -> new SolidFancyTreeFeature(TreeFeatureConfig::deserializeFoliage));
 
 
     public static void register(IEventBus eventBus) {
