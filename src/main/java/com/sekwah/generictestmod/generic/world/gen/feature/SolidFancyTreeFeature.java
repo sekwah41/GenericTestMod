@@ -19,7 +19,7 @@ public class SolidFancyTreeFeature extends FancyTreeFeature {
     public SolidFancyTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225803_1_) {
         super(p_i225803_1_);
     }
-    
+
     public int makeBranch(IWorldGenerationReader worldGenerationReader, Random random, BlockPos blockPos, BlockPos blockPos2, boolean p_227235_5_, Set<BlockPos> blockPosSet, MutableBoundingBox boundingBox, TreeFeatureConfig treeFeatureConfig) {
         if (!p_227235_5_ && Objects.equals(blockPos, blockPos2)) {
             return -1;
