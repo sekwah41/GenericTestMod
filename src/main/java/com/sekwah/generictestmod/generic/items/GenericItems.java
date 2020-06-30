@@ -9,7 +9,7 @@ import static com.sekwah.generictestmod.GenericConstants.MOD_ID;
 
 public class GenericItems {
 
-    private static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, MOD_ID);
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

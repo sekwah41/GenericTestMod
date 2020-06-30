@@ -1,7 +1,6 @@
 package com.sekwah.generictestmod.generic.world.gen;
 
 import com.sekwah.generictestmod.generic.world.biome.CustomFeatures;
-import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
@@ -11,7 +10,6 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeManager;
 
 import java.util.*;
 
@@ -34,11 +32,11 @@ public class GenGen {
         ));
 
 
-        getBiomes(HOT, OVERWORLD).forEach(biome -> biome.addFeature(
+        /*getBiomes(HOT, OVERWORLD).forEach(biome -> biome.addFeature(
                 GenerationStage.Decoration.VEGETAL_DECORATION,
                 GenericFeatures.SOLID_FANCY_TREE_FEATURE.get().withConfiguration(CustomFeatures.OBSIDIAN_TREE_CONFIG)
                         .withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(8))
-        )));
+        )));*/
     }
 
     public static Set<Biome> getBiomes(BiomeDictionary.Type... biomeTypeArgs) {

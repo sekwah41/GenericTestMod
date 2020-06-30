@@ -132,12 +132,13 @@ dependencies {
 
     implementation "org.spongepowered:mixin:0.8-SNAPSHOT"
 
+    // From https://www.curseforge.com/minecraft/mc-mods
     // You can remove these though we've just added them as they are nice for dev and you can add some interesting things
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
     // Good example of how to add a curseforge mod as a dependancy
-    compile fg.deobf("curse.maven:hwyla:2880069")
+    compile fg.deobf("curse.maven:hwyla:${hwyla_fileid}")
 
     //include("org.spongepowered:mixin:0.8")
     //include('org.ow2.asm:asm-debug-all:5.2')

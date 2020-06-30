@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MainMenuScreen.class)
 public class MixinMainMenu {
 
-    @Inject(method = "init()V", at = @At("RETURN"))
+    // func_231160_c_ possibly init?
+    @Inject(method = "func_231160_c_", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
         GenericTestMod.LOGGER.debug("MAIN MENU INIT MIXIN");
     }
