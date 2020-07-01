@@ -18,11 +18,14 @@ If you don't know Java you are going to struggle, learning this way is not an id
 Though playing with other peoples projects or altering existing code may help you, don't expect to instantly be able to make a lot of new content.
 
 ### Examples
-Ore Generation  
-Feature Generation  
-Custom Features  
-AccessTransformers  
-JSCoreMod - [Good reference for example scripts](https://github.com/MinecraftForge/CoreMods/tree/e6fed88bfcb29bc062c04310f18ebe2777582d03/src/test/javascript)
+ * Ore Generation  
+ * Feature Generation  
+ * Custom Features  
+ * AccessTransformers  
+ * JSCoreMod (Though with custom help to make it more readable) - [Good reference for example scripts without](https://github.com/MinecraftForge/CoreMods/tree/e6fed88bfcb29bc062c04310f18ebe2777582d03/src/test/javascript)
+
+# Examples to make
+ * New creative tabs
 
 ### Not fully supported examples
 **Forge Mixins** - Waiting for official implementation, for now only works in dev, for now if you build mods mixins will just

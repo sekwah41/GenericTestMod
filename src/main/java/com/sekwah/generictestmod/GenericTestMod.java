@@ -3,6 +3,7 @@ package com.sekwah.generictestmod;
 import com.sekwah.generictestmod.generic.block.GenericBlocks;
 import com.sekwah.generictestmod.generic.items.GenericItems;
 import com.sekwah.generictestmod.generic.world.gen.GenGen;
+import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
@@ -48,7 +49,7 @@ public class GenericTestMod {
 
         GenericBlocks.register(eventBus);
 
-        //GenericFeatures.register(eventBus);
+        GenericFeatures.register(eventBus);
 
         /*
             Wrap your code in this stuff so it doesn't crash if its not loaded. If you get crashes for missing classes
