@@ -1,6 +1,5 @@
 package com.sekwah.generictestmod.generic.world.gen.feature;
 
-import com.sekwah.generictestmod.generic.block.tree.ObsidianTree;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
@@ -8,7 +7,6 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TwoLayerFeature;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
-import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -29,8 +27,8 @@ public class GenericFeatures {
             new TwoLayerFeature(1, 0, 1)).func_236700_a_()
     ).func_236700_a_().build();
 
-    public static RegistryObject<TreeFeature> SOLID_FANCY_TREE_FEATURE = FEATURES.register("solid_fancy_tree",
-            () -> new TreeFeature(OBSIDIAN_TREE_CONFIG.field_236676_a_));
+    public static RegistryObject<TreeFeature> SOLID_FANCY_TREE_FEATURE = FEATURES.register("obsidian_tree",
+            () -> new TreeFeature(BaseTreeFeatureConfig.field_236676_a_));
 
 
     public static void register(IEventBus eventBus) {
