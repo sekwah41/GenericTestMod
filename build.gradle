@@ -3,6 +3,7 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = "https://repo.spongepowered.org/maven" }
         maven {url "https://plugins.gradle.org/m2/"}
+        // Only temporary
         jcenter()
         mavenCentral()
     }
@@ -43,9 +44,11 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    // http://export.mcpbot.bspk.rs/
-    // We are using mixed in ours just because sometimes the mcp mappings can be behind with updates.
     mappings channel: 'snapshot', version: project.mcp_mapping
+
+    // This is for personal local tests i was doing ignore it ;)
+    //mappings channel: 'snapshot', version: '20200706-unofficialtest-1.16.1'
+
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
@@ -140,7 +143,6 @@ dependencies {
     // Good example of how to add a curseforge mod as a dependancy
     compile fg.deobf("curse.maven:hwyla:${hwyla_fileid}")
 
-    //include("org.spongepowered:mixin:0.8")
     //include('org.ow2.asm:asm-debug-all:5.2')
 
     // You may put jars on which you depend on in ./libs or you may define them like so..

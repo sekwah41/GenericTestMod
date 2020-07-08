@@ -20,12 +20,12 @@ public class GenericFeatures {
     private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
 
     public static final BaseTreeFeatureConfig OBSIDIAN_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(
-            new SimpleBlockStateProvider(Blocks.field_235399_ni_.getDefaultState()),
+            new SimpleBlockStateProvider(Blocks.CRYING_OBSIDIAN.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.DIAMOND_ORE.getDefaultState()),
             new BlobFoliagePlacer(2, 0, 0, 0, 3),
             new StraightTrunkPlacer(5, 2, 0),
             new TwoLayerFeature(1, 0, 1)).func_236700_a_()
-    ).func_236700_a_().build();
+    ).build();
 
     public static RegistryObject<TreeFeature> SOLID_FANCY_TREE_FEATURE = FEATURES.register("obsidian_tree",
             () -> new TreeFeature(BaseTreeFeatureConfig.field_236676_a_));

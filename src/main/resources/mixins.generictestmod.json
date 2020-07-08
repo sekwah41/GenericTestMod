@@ -7,7 +7,8 @@
   "mixins": [
   ],
   "client": [
-    "MixinMainMenu"
+    "MixinMainMenu",
+    "MixinPanda"
   ],
   "injectors": {
     "defaultRequire": 1
