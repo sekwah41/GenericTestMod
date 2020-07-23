@@ -28,8 +28,7 @@ Though playing with other peoples projects or altering existing code may help yo
  * New creative tabs
 
 ### Not fully supported examples
-**Forge Mixins** - Waiting for official implementation, for now only works in dev, for now if you build mods mixins will just
-be ignored by a client though at least you can still play with it for now.
+**Forge Mixins** - Mixins is now being officially included. I will update the examples when I get the time to demonstrate updated setup.
 
 ## Mixins Notice
 Lex is currently actively choosing not to ship Mixin's with forge in its current state (as Mumfrey does not feel its in a good enough state).
