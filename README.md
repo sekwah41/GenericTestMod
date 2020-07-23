@@ -28,18 +28,10 @@ Though playing with other peoples projects or altering existing code may help yo
  * New creative tabs
 
 ### Not fully supported examples
-**Forge Mixins** - Mixins is now being officially included. I will update the examples when I get the time to demonstrate updated setup.
+**Forge Mixins** - Using possibly outdated setup. See below notice
 
 ## Mixins Notice
-Lex is currently actively choosing not to ship Mixin's with forge in its current state (as Mumfrey does not feel its in a good enough state).
-This looks like it will change once Mumfrey deems them.
-stable enough to work in forge.
-
-## Services in dev
-**I need to find a proper way to build MANIFEST to the src though for now copy from after a build to test**  
-/build/tmp/jar/
-
-The META-INF will be ignored in the resources though it is needed to properly link mixins for now without anything else.
+Mixins are now being officially included. I will update the examples when I get the time to demonstrate updated setup.
 
 # Other mods to look at
 As most of the time I am spending on hobby projects will be going into making other modding projects I will link other mods
