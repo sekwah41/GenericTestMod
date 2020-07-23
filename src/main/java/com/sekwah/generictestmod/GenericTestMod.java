@@ -5,7 +5,6 @@ import com.sekwah.generictestmod.generic.items.GenericItems;
 import com.sekwah.generictestmod.generic.world.gen.GenGen;
 import com.sekwah.generictestmod.generic.world.gen.feature.GenericFeatures;
 import net.minecraft.block.Blocks;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MainMenuScreen.class)
-public class MixinMainMenu {
+public class MainMenuMixin {
 
     // func_231160_c_ possibly init?
     @Inject(method = "init", at = @At("RETURN"))

@@ -24,11 +24,11 @@ public class GenericFeatures {
             new SimpleBlockStateProvider(Blocks.DIAMOND_ORE.getDefaultState()),
             new BlobFoliagePlacer(2, 0, 0, 0, 3),
             new StraightTrunkPlacer(5, 2, 0),
-            new TwoLayerFeature(1, 0, 1)).func_236700_a_()
+            new TwoLayerFeature(1, 0, 1)).setIgnoreVines()
     ).build();
 
     public static RegistryObject<TreeFeature> SOLID_FANCY_TREE_FEATURE = FEATURES.register("obsidian_tree",
-            () -> new TreeFeature(BaseTreeFeatureConfig.field_236676_a_));
+            () -> new TreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
 
 
     public static void register(IEventBus eventBus) {

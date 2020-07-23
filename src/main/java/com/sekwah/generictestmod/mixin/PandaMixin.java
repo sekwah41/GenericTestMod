@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import javax.annotation.Nullable;
 
 @Mixin(PandaEntity.class)
-public class MixinPanda {
+public class PandaMixin {
 
     @Inject(method = "getPandaFlag", at = @At("RETURN"), cancellable = true)
     private void getPandaFlag(int flagId, CallbackInfoReturnable<Boolean> callback) {

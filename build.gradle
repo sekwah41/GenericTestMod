@@ -47,12 +47,12 @@ minecraft {
     mappings channel: 'snapshot', version: project.mcp_mapping
 
     // This is for personal local tests i was doing ignore it ;)
-    //mappings channel: 'snapshot', version: '20200706-unofficialtest-1.16.1'
+    //mappings channel: 'snapshot', version: 'unofficialtest-1.16.1'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    
+
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
@@ -137,11 +137,11 @@ dependencies {
 
     // From https://www.curseforge.com/minecraft/mc-mods
     // You can remove these though we've just added them as they are nice for dev and you can add some interesting things
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    //compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    //runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
     // Good example of how to add a curseforge mod as a dependancy
-    compile fg.deobf("curse.maven:hwyla:${hwyla_fileid}")
+    //compile fg.deobf("curse.maven:hwyla:${hwyla_fileid}")
 
     //include('org.ow2.asm:asm-debug-all:5.2')
 

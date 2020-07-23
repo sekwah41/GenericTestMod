@@ -42,6 +42,11 @@ stable enough to work in forge.
 
 The META-INF will be ignored in the resources though it is needed to properly link mixins for now without anything else.
 
+# Other mods to look at (with summaries of code features)
+## Actively in 1.16.1
+## Currently updating to 1.16.1 
+[Re:Skin](https://github.com/sekwah41/Re-Skin/tree/forge-1.16.1) (Commands, Network, Custom Player Data, Access Transformers)
+
 ## Useful Tools/Info
 Hotswapping that I didn't know existed for far too long
 https://dcevm.github.io/.
@@ -49,8 +54,3 @@ Check https://aur.archlinux.org/packages/jdk8-openjdk-dcevm for an easy install 
 
 ## Will you do fabric examples?
 For now no, though there is a lot of help on the fabric discord https://discord.gg/v6v4pMv
-
-While it is fun to mod the new forge code wise is actually really nice.
-
-We are going to take a look at mapping the MCP names over to fabric for easier porting of mods as Fabric has a much
-better decompiling system which can support a lot more changes.

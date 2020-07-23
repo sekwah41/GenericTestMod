@@ -43,7 +43,7 @@ function initializeCoreMod() {
                 'type': 'METHOD',
                 'class': 'net.minecraft.client.gui.screen.MainMenuScreen',
                 //'methodName': Java.type("net.minecraftforge.coremod.api.ASMAPI").mapMethod('funcname'),
-                'methodName': 'func_231160_c_',
+                'methodName': 'init',
                 'methodDesc': '()V'
             },
             'transformer': function(method) {
