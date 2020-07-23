@@ -42,7 +42,10 @@ stable enough to work in forge.
 
 The META-INF will be ignored in the resources though it is needed to properly link mixins for now without anything else.
 
-# Other mods to look at (with summaries of code features)
+# Other mods to look at
+As most of the time I am spending on hobby projects will be going into making other modding projects I will link other mods
+I am working on for examples with summaries of what they include. Though for anything experimental I will likely keep adding
+examples to here.
 ## Actively in 1.16.1
 ## Currently updating to 1.16.1 
 [Re:Skin](https://github.com/sekwah41/Re-Skin/tree/forge-1.16.1) (Commands, Network, Custom Player Data, Access Transformers)
